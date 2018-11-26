@@ -19,13 +19,17 @@ import { SigninComponent } from './auth/signin/signin.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {  HttpClientModule  } from '@angular/common/http';
 import { HeaderComponent } from './header/header.component';
+import { WelcomeComponent } from './welcome/welcome.component';
+import { AuthGuardService } from './services/auth-guard.service';
 
 const appRoutes: Routes = [
   { path: 'auth/signup', component: SignupComponent  },
   { path: 'auth/signin', component: SigninComponent  },
-  { path: 'user-film', component: UserFilmComponent  },
-  { path: 'user-scenario', component: UserScenarioComponent  },
-  { path: 'home', component: HomeComponent }
+  { path: 'user-film', canActivate: [AuthGuardService], component: UserFilmComponent  },
+  { path: 'user-scenario', canActivate: [AuthGuardService], component: UserScenarioComponent  },
+  { path: 'user-setting',  canActivate: [AuthGuardService], component: UserSettingComponent },
+  { path: 'home',  canActivate: [AuthGuardService], component: HomeComponent },
+  { path: 'welcome',  component: WelcomeComponent }
   
 ]
 @NgModule({
@@ -40,7 +44,8 @@ const appRoutes: Routes = [
     UserSettingComponent,
     SigninComponent,
     SignupComponent,
-    HeaderComponent
+    HeaderComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
