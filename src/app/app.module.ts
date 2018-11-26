@@ -29,7 +29,9 @@ const appRoutes: Routes = [
   { path: 'user-scenario', canActivate: [AuthGuardService], component: UserScenarioComponent  },
   { path: 'user-setting',  canActivate: [AuthGuardService], component: UserSettingComponent },
   { path: 'home',  canActivate: [AuthGuardService], component: HomeComponent },
-  { path: 'welcome',  component: WelcomeComponent }
+  { path: 'welcome',  component: WelcomeComponent },
+  { path: '', redirectTo: 'welcome', pathMatch: 'full'},
+  { path: '**', redirectTo: 'welcome'}
   
 ]
 @NgModule({
