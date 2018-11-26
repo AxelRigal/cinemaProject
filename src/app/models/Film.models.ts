@@ -1,6 +1,6 @@
 export class Film{
 
-
+    photo: string;
     constructor(
         public id: number,
         public name: string,

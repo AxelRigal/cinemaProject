@@ -10,7 +10,24 @@ import { SearchComponent } from './home/search/search.component';
 import { UserFilmComponent } from './user-film/user-film/user-film.component';
 import { UserScenarioComponent } from './user-scenario/user-scenario/user-scenario.component';
 import { UserSettingComponent } from './user-setting/user-setting.component';
+import { AuthService } from './services/auth.service';
+import { FilmsService } from './services/films.service';
+import { CommentsService } from './services/comments.service';
+import { Routes, RouterModule } from '@angular/router';
+import { SignupComponent } from './auth/signup/signup.component';
+import { SigninComponent } from './auth/signin/signin.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {  HttpClientModule  } from '@angular/common/http';
+import { HeaderComponent } from './header/header.component';
 
+const appRoutes: Routes = [
+  { path: 'auth/signup', component: SignupComponent  },
+  { path: 'auth/signin', component: SigninComponent  },
+  { path: 'user-film', component: UserFilmComponent  },
+  { path: 'user-scenario', component: UserScenarioComponent  },
+  { path: 'home', component: HomeComponent }
+  
+]
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,12 +37,23 @@ import { UserSettingComponent } from './user-setting/user-setting.component';
     SearchComponent,
     UserFilmComponent,
     UserScenarioComponent,
-    UserSettingComponent
+    UserSettingComponent,
+    SigninComponent,
+    SignupComponent,
+    HeaderComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    FilmsService,
+    CommentsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
