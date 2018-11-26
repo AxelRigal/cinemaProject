@@ -37,7 +37,6 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     HomeComponent,
-    LoginComponent,
     BodyComponent,
     SearchComponent,
     UserFilmComponent,
