@@ -49,7 +49,7 @@ export class BodyComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(){
-    this.filmSub.unsubscribe();
-    this.commentSub.unsubscribe();
+   // this.filmSub.unsubscribe();
+    // this.commentSub.unsubscribe();
   }
 }
