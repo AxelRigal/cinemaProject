@@ -22,6 +22,7 @@ export class BodyComponent implements OnInit, OnDestroy {
     private router: Router) { }
 
   ngOnInit() {
+    this.onFetch();
     this.subComments();
     this.subFilms();
   }
@@ -35,21 +36,25 @@ export class BodyComponent implements OnInit, OnDestroy {
     this.commentsService.emitComments();
   }
 
-  subFilms() {
-    this.filmSub = this.filmsService.filmsSubject.subscribe(
-      (films: Film[]) => {
+  subFilms(){
+     this.filmSub = this.filmsService.filmsSubject.subscribe(
+      (films: Film[]) =>{
         this.films = films;
       }
     )
+    this.filmsService.getFilmsFromServer();
     this.filmsService.emitFilms();
+  }
+  onFetch(){
+    this.filmsService.getFilmsFromServer();
   }
 
   onViewFilm(id: number) {
     this.router.navigate(['/films', 'view', id]);
   }
 
-  ngOnDestroy() {
-    // this.filmSub.unsubscribe();
-    // this.commentSub.unsubscribe();
+  ngOnDestroy(){
+    this.filmSub.unsubscribe();
+    this.commentSub.unsubscribe();
   }
 }
