@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Film } from '../models/Film.models';
+import {HttpClient} from '@angular/common/http';
 import * as firebase from 'firebase';
 import { Subject } from 'rxjs';
 @Injectable({
@@ -8,16 +9,27 @@ import { Subject } from 'rxjs';
 export class FilmsService {
   films: Film[] = [];
   filmsSubject = new Subject<Film[]>();
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
 
   emitFilms(){
     this.filmsSubject.next(this.films);
   }
 
   saveFilms(){
-    firebase.database().ref('/films').set(this.films);
+   firebase.database().ref('/films').set(this.films);
   }
-
+  /*saveFilms(){
+    this.httpClient
+      .put('https://cinema-project-dcb5f.firebaseio.com/', this.films)
+      .subscribe(
+        () => {
+          console.log('enregistrement terminé')
+        },
+        (error) => {
+          console.log('erreur de sauvegarde : ' + error);
+        }
+      )
+  } */
   getFilms(){
     firebase.database().ref('/films')
       .on('value', (data) =>{
@@ -25,7 +37,6 @@ export class FilmsService {
           this.emitFilms();
       });
   }
-
 
   getSingleFilm(id:number){
     return new Promise(
@@ -42,13 +53,29 @@ export class FilmsService {
     )
   }
 
-  getLastFilm()
-  { // a developper 
-    return this.films.lastIndexOf;
-  }
+  getFilmsFromServer(){
+    this.httpClient
+     .get<any[]>('https://cinema-project-dcb5f.firebaseio.com/films.json')
+     .subscribe(
+       (response) =>{
+           this.films= response;
+           console.log(this.films);
+           this.emitFilms();
+       },
+       (error)=>{
+           console.log('erreur de chargement ' + error);
+       }
+     )
+   }
+
+ // getLastFilm()
+  //{ // a developper 
+  //  return this.films.lastIndexOf;
+  ///}
 
   createNewFilm(newFilm: Film){
     this.films.push(newFilm);
+    this.saveFilms();
     this.emitFilms();
   }
 
