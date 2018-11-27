@@ -26,11 +26,6 @@ export class BodyComponent implements OnInit, OnDestroy {
     this.subComments();
     this.subFilms();
   }
-  ngDoCheck(){
-    this.onFetch();
-    this.subComments();
-    this.subFilms();
-  }
 
   subComments(){
     this.commentSub = this.commentsService.commentSubject.subscribe(
