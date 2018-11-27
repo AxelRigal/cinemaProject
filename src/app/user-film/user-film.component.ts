@@ -21,20 +21,22 @@ export class UserFilmComponent implements OnInit {
     this.initForm();
   }
 
-  initForm(){
+  initForm() {
     this.filmForm = this.formBuilder.group({
       name: ['', Validators.required],
       realisator: ['', Validators.required],
-      date: ['', Validators.required]
+      date: ['', Validators.required],
+      synopsisLong: ['', Validators.required]
     });
   }
 
-  onSaveFilm(){
-    const name= this.filmForm.get('name').value;
+  onSaveFilm() {
+    const name = this.filmForm.get('name').value;
     const realisator = this.filmForm.get('realisator').value;
     const date = this.filmForm.get('date').value;
+    const synopsisLong = this.filmForm.get ('synopsisLong').value;
     const id = this.filmsService.getLastFilm();
-    const newFilm = new Film(0, name, '', '', date, realisator) // à remplacer 0 par this.filmsService.getLastFilm()
+    const newFilm = new Film(0, name, '', synopsisLong, date, realisator); // à remplacer 0 par this.filmsService.getLastFilm()
     this.filmsService.createNewFilm(newFilm);
     this.router.navigate(['/home']);
   }

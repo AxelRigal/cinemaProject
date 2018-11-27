@@ -20,12 +20,12 @@ export class SingleFilmComponent implements OnInit {
     const id = this.route.snapshot.params['id'];
 
     this.filmsService.getSingleFilm(id).then(
-      (film : Film) =>{
+      (film: Film) => {
         this.film = film;
       }
     )
   }
-  onBack(){
+  onBack() {
     this.router.navigate(['/welcome']);
   }
 }

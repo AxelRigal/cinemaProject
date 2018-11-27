@@ -1,18 +1,18 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <ul class="nav navbar-nav">
-        <li routerLinkActive="active">
-            <a routerLink="welcome">Welcome</a>
-          </li>     
       <li routerLinkActive="active">
-        <a routerLink="home">List Movies</a>
+        <a routerLink="welcome">Welcome</a>
       </li>
       <li routerLinkActive="active">
-        <a routerLink="user-film">Add Movie</a>
+        <a routerLink="home">List of Movies</a>
       </li>
       <li routerLinkActive="active">
+        <a routerLink="user-film">Add Movie/Synopsis</a>
+      </li>
+      <!-- <li routerLinkActive="active">
         <a routerLink="user-scenario">Add Scenario</a>
-      </li>
+      </li> -->
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li routerLinkActive="active" *ngIf="!isAuth">

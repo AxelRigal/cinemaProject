@@ -17,39 +17,39 @@ export class BodyComponent implements OnInit, OnDestroy {
   comments: Comment[] = [];
   commentSub: Subscription;
 
-  constructor(private filmsService: FilmsService, 
-              private commentsService: CommentsService,
-              private router: Router) { }
+  constructor(private filmsService: FilmsService,
+    private commentsService: CommentsService,
+    private router: Router) { }
 
   ngOnInit() {
     this.subComments();
     this.subFilms();
   }
 
-  subComments(){
+  subComments() {
     this.commentSub = this.commentsService.commentSubject.subscribe(
-      (comments: Comment[]) =>{
+      (comments: Comment[]) => {
         this.comments = comments;
       }
     )
     this.commentsService.emitComments();
   }
 
-  subFilms(){
+  subFilms() {
     this.filmSub = this.filmsService.filmsSubject.subscribe(
-      (films: Film[]) =>{
+      (films: Film[]) => {
         this.films = films;
       }
     )
     this.filmsService.emitFilms();
   }
 
-  onViewFilm(id:number){
+  onViewFilm(id: number) {
     this.router.navigate(['/films', 'view', id]);
   }
 
-  ngOnDestroy(){
-   // this.filmSub.unsubscribe();
+  ngOnDestroy() {
+    // this.filmSub.unsubscribe();
     // this.commentSub.unsubscribe();
   }
 }
