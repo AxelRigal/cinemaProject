@@ -25,5 +25,7 @@ export class SingleFilmComponent implements OnInit {
       }
     )
   }
-
+  onBack(){
+    this.router.navigate(['/welcome']);
+  }
 }

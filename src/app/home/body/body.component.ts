@@ -24,7 +24,6 @@ export class BodyComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subComments();
     this.subFilms();
-
   }
 
   subComments(){
