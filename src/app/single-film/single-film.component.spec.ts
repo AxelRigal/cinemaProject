@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UserScenarioComponent } from './user-scenario.component';
+import { SingleFilmComponent } from './single-film.component';
 
-describe('UserScenarioComponent', () => {
-  let component: UserScenarioComponent;
-  let fixture: ComponentFixture<UserScenarioComponent>;
+describe('SingleFilmComponent', () => {
+  let component: SingleFilmComponent;
+  let fixture: ComponentFixture<SingleFilmComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UserScenarioComponent ]
+      declarations: [ SingleFilmComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UserScenarioComponent);
+    fixture = TestBed.createComponent(SingleFilmComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

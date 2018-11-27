@@ -26,6 +26,7 @@ export class FilmsService {
       });
   }
 
+
   getSingleFilm(id:number){
     return new Promise(
       (resolve, reject) =>{
@@ -40,6 +41,12 @@ export class FilmsService {
       }
     )
   }
+
+  getLastFilm()
+  { // a developper 
+    return this.films.lastIndexOf;
+  }
+
   createNewFilm(newFilm: Film){
     this.films.push(newFilm);
     this.emitFilms();

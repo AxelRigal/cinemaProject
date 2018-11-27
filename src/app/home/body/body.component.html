@@ -1,3 +1,18 @@
-<p>
-  body works!
-</p>
+<div class="row">
+    <div class="col-xs-12">
+        <h2>Movies</h2>
+        <div class="list-group">
+            <button class="list-group-item" *ngFor="let film of films; let i = index" (click)="onViewFilm(i)">
+              <h3 class="list-group-item-heading">
+                {{film.name}}
+              </h3>
+              <h2>
+                {{film.synopsisShort}} 
+                Release date : {{film.date}}
+                Realisateur : {{film.realisator}}
+              </h2>
+              <h2>Commments ------</h2>
+          </button>
+        </div>
+    </div>
+</div>
