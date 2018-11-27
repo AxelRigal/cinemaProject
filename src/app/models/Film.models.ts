@@ -1,4 +1,4 @@
-export class Film{
+export class Film {
 
     photo: string;
     constructor(
@@ -8,7 +8,7 @@ export class Film{
         public synopsisLong: string,
         public date: Date,
         public realisator: string
-    ){
-        
+    ) {
+
     }
 }
