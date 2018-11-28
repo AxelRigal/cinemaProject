@@ -28,6 +28,7 @@ const appRoutes: Routes = [
   { path: 'user-film', canActivate: [AuthGuardService], component: UserFilmComponent  },
   { path: 'user-scenario', canActivate: [AuthGuardService], component: UserScenarioComponent  },
   { path: 'user-setting',  canActivate: [AuthGuardService], component: UserSettingComponent },
+  { path: 'single-film/view/:id', canActivate:[AuthGuardService], component: SingleFilmComponent},
   { path: 'home',  canActivate: [AuthGuardService], component: HomeComponent },
   { path: 'welcome',  component: WelcomeComponent },
   { path: '', redirectTo: 'welcome', pathMatch: 'full'},
