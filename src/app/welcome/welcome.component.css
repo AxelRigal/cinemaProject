@@ -1,11 +1,22 @@
-p{
-color:blue;
-}
-
 .exemple1{
-    background-color: blue;
+    color: rgb(235, 231, 35);
+    /*couleur texte*/
+    font-size: 105px;
+    /*grosseur texte*/
+    background-color: burlywood;
+    /*couleur fond*/
+    text-align: center;
+    /*alignement texte*/
 }
-
 .exemple2{
+    color: rgb(82, 189, 82);
+    font-size: 75px;
     background-color: pink;
+    text-align: center;
+}
+.exemple3{
+    color: brown;
+    font-size: 280px;
+    background-color: rgb(215, 208, 221);
+    text-align: center;
 }
