@@ -10,19 +10,24 @@
                 <h5>Release date : {{film.date}}</h5>
                 <h5>Realisateur : {{film.realisator}}</h5>
                 <h5>Scénario : {{film.synopsisLong}}</h5>
-               <form [formGroup]="commentForm" (ngSubmit)="onSaveComment(film.id)">
+                <div *ngFor="let comment of comments">
+                    <div *ngIf="film.id === comment.idFilm && comment.idUser == this.userId" style="border-style: dotted;">
+                       <h5> Note donnée : {{comment.note}}</h5>
+                       <h5> Commentaire : {{comment.content}}</h5>
+                    </div>
+                </div>
+                <form [formGroup]="commentForm" (ngSubmit)="onSaveComment(film.id)">
                     <div class="form-group">
-                      <label for="name">Note du film :</label>
-                      <input type="text" class="form-control" id="note" formControlName="note">
+                        <label for="name">Note du film :</label>
+                        <input type="text" class="form-control" id="note" formControlName="note">
                     </div>
                     <div class="form-group"> 
                         <label for="name">Commentaire :</label>
                         <input type="Text" class="form-control" id="content" formControlName="content">
                     </div>
                     <button class="btn btn-success" [disabled]="commentForm.invalid">Submit comment</button>
-                  </form>
-                </button>
+                </form>
+            </button>
         </div>
     </div>
-
 </div>

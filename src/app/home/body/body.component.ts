@@ -19,6 +19,7 @@ export class BodyComponent implements OnInit, OnDestroy {
   comments: Comment[] = [];
   commentSub: Subscription;
   userId: string;
+  show: boolean = false;
   commentForm: FormGroup;
   constructor(private filmsService: FilmsService,
     private commentsService: CommentsService,
@@ -30,6 +31,7 @@ export class BodyComponent implements OnInit, OnDestroy {
     this.subComments();
     this.subFilms();
     this.initForm();
+    this.getUserId();
   }
 
   initForm() {
@@ -92,5 +94,14 @@ export class BodyComponent implements OnInit, OnDestroy {
     this.commentSub.unsubscribe();
   }
 
+  getUserId(){
+    firebase.auth().onAuthStateChanged(
+      (user)=>{
+        if(user){
+          this.userId = user.uid;
+        }
+      }
+    )
+  }
 
 }
