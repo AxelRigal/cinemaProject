@@ -59,7 +59,6 @@ export class FilmsService {
      .subscribe(
        (response) =>{
            this.films= response;
-           console.log(this.films);
            this.emitFilms();
        },
        (error)=>{
@@ -74,8 +73,6 @@ export class FilmsService {
   }
 
   createNewFilm(newFilm: Film){
-    console.log(this.films);
-    console.log(newFilm);
     this.films.push(newFilm);
     this.saveFilms();
     this.emitFilms();

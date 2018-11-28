@@ -8,12 +8,7 @@ import {HttpClient} from '@angular/common/http';
   providedIn: 'root'
 })
 export class CommentsService {
-  comments: Comment[] = [{
-      content: 'test',
-      idFilm: 0,
-      idUser: '',
-      note: 1
-                    }];
+  comments: Comment[] = [];
   commentSubject = new Subject<Comment[]>();
   constructor(private httpClient: HttpClient) { }
 
@@ -54,7 +49,6 @@ export class CommentsService {
      .subscribe(
        (response) =>{
            this.comments= response;
-           console.log(this.comments);
            this.emitComments();
        },
        (error)=>{
@@ -64,8 +58,6 @@ export class CommentsService {
    }
 
   createNewComment(newComment: Comment){
-    console.log(newComment);
-    console.log(this.comments);
     this.comments = this.comments || [];
     this.comments.push(newComment);
     this.saveComments();
