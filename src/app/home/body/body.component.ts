@@ -86,7 +86,7 @@ export class BodyComponent implements OnInit, OnDestroy {
   }
 
   onViewFilm(id: number) {
-    this.router.navigate(['/films', 'view', id]);
+    this.router.navigate(['/single-film', 'view', id]);
   }
 
   ngOnDestroy(){
