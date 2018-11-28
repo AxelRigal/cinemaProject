@@ -3,8 +3,10 @@ import { Film } from 'src/app/models/Film.models';
 import { Comment } from 'src/app/models/Comment.models';
 import { FilmsService } from 'src/app/services/films.service';
 import { CommentsService } from 'src/app/services/comments.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-body',
@@ -16,15 +18,45 @@ export class BodyComponent implements OnInit, OnDestroy {
   filmSub: Subscription;
   comments: Comment[] = [];
   commentSub: Subscription;
-
+  userId: string;
+  commentForm: FormGroup;
   constructor(private filmsService: FilmsService,
     private commentsService: CommentsService,
-    private router: Router) { }
+    private router: Router,
+    private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.onFetch();
     this.subComments();
     this.subFilms();
+    this.initForm();
+  }
+
+  initForm() {
+    this.commentForm = this.formBuilder.group({
+      note: ['',Validators.minLength(1)],
+      content: ['', Validators.minLength(10)]
+    });
+  }
+
+  onSaveComment(id: number) {
+    const note = this.commentForm.get('note').value;
+
+    //firebase.auth().currentUser.getIdToken().then(
+    //  (token: string) => token
+    //);
+    firebase.auth().onAuthStateChanged(
+      (user)=>{
+        if(user){
+           const content = this.commentForm.get('content').value;
+           const filmId = this.filmsService.getFilm(id).id;
+           const newComment = new Comment(content, note, filmId, user.uid); // à remplacer 0 par this.filmsService.getLastFilm()
+           this.commentsService.createNewComment(newComment);
+        }
+      }
+    );
+
+
   }
 
   subComments() {
@@ -33,6 +65,7 @@ export class BodyComponent implements OnInit, OnDestroy {
         this.comments = comments;
       }
     )
+    this.commentsService.getCommentsFromServer();
     this.commentsService.emitComments();
   }
 
@@ -47,6 +80,7 @@ export class BodyComponent implements OnInit, OnDestroy {
   }
   onFetch(){
     this.filmsService.getFilmsFromServer();
+    this.commentsService.getCommentsFromServer();
   }
 
   onViewFilm(id: number) {
@@ -57,4 +91,6 @@ export class BodyComponent implements OnInit, OnDestroy {
     this.filmSub.unsubscribe();
     this.commentSub.unsubscribe();
   }
+
+
 }

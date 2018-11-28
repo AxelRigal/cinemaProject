@@ -5,7 +5,7 @@ export class Comment {
         public content: string,
         public note: number,
         public idFilm: number,
-        public idUser: number
+        public idUser: string
     ) {
 
     }

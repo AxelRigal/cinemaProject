@@ -68,12 +68,14 @@ export class FilmsService {
      )
    }
 
- // getLastFilm()
-  //{ // a developper 
-  //  return this.films.lastIndexOf;
-  ///}
+  getLastFilm()
+  {
+    return this.films.length;
+  }
 
   createNewFilm(newFilm: Film){
+    console.log(this.films);
+    console.log(newFilm);
     this.films.push(newFilm);
     this.saveFilms();
     this.emitFilms();
@@ -90,5 +92,9 @@ export class FilmsService {
     this.films.splice(filmIndexToRemove, 1);
     this.saveFilms();
     this.emitFilms();
+  }
+
+  getFilm(id : number){
+    return this.films[id];
   }
 }

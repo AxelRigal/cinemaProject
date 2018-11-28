@@ -36,7 +36,7 @@ export class UserFilmComponent implements OnInit {
     const date = this.filmForm.get('date').value;
     const synopsisLong = this.filmForm.get ('synopsisLong').value;
     const id = this.filmsService.getLastFilm();
-    const newFilm = new Film(0, name, '', synopsisLong, date, realisator); // à remplacer 0 par this.filmsService.getLastFilm()
+    const newFilm = new Film(id, name, '', synopsisLong, date, realisator); // à remplacer 0 par this.filmsService.getLastFilm()
     this.filmsService.createNewFilm(newFilm);
     this.router.navigate(['/home']);
   }
