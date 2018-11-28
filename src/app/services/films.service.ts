@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Film } from '../models/Film.models';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import * as firebase from 'firebase';
 import { Subject } from 'rxjs';
 @Injectable({
@@ -11,12 +11,12 @@ export class FilmsService {
   filmsSubject = new Subject<Film[]>();
   constructor(private httpClient: HttpClient) { }
 
-  emitFilms(){
+  emitFilms() {
     this.filmsSubject.next(this.films);
   }
 
-  saveFilms(){
-   firebase.database().ref('/films').set(this.films);
+  saveFilms() {
+    firebase.database().ref('/films').set(this.films);
   }
   /*saveFilms(){
     this.httpClient
@@ -30,59 +30,58 @@ export class FilmsService {
         }
       )
   } */
-  getFilms(){
+  getFilms() {
     firebase.database().ref('/films')
-      .on('value', (data) =>{
-          this.films = data.val() ? data.val() : [];
-          this.emitFilms();
+      .on('value', (data) => {
+        this.films = data.val() ? data.val() : [];
+        this.emitFilms();
       });
   }
 
-  getSingleFilm(id:number){
+  getSingleFilm(id: number) {
     return new Promise(
-      (resolve, reject) =>{
-        firebase.database().ref('/films/'+id).once('value').then(
+      (resolve, reject) => {
+        firebase.database().ref('/films/' + id).once('value').then(
           (data) => {
             resolve(data.val());
           },
           (error) => {
             reject(error);
           }
-        )
+        );
       }
-    )
+    );
   }
 
-  getFilmsFromServer(){
+  getFilmsFromServer() {
     this.httpClient
-     .get<any[]>('https://cinema-project-dcb5f.firebaseio.com/films.json')
-     .subscribe(
-       (response) =>{
-           this.films= response;
-           console.log(this.films);
-           this.emitFilms();
-       },
-       (error)=>{
-           console.log('erreur de chargement ' + error);
-       }
-     )
-   }
+      .get<any[]>('https://cinema-project-dcb5f.firebaseio.com/films.json')
+      .subscribe(
+        (response) => {
+          this.films = response;
+          console.log(this.films);
+          this.emitFilms();
+        },
+        (error) => {
+          console.log('erreur de chargement ' + error);
+        }
+      );
+  }
 
- // getLastFilm()
-  //{ // a developper 
-  //  return this.films.lastIndexOf;
-  ///}
+  getLastFilm() {
+    return this.films.lastIndexOf;
+  }
 
-  createNewFilm(newFilm: Film){
+  createNewFilm(newFilm: Film) {
     this.films.push(newFilm);
     this.saveFilms();
     this.emitFilms();
   }
 
-  removeFilm(film: Film){
+  removeFilm(film: Film) {
     const filmIndexToRemove = this.films.findIndex(
-      (filmEl) =>{
-        if(filmEl === film){
+      (filmEl) => {
+        if (filmEl === film) {
           return true;
         }
       }

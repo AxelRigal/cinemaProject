@@ -16,7 +16,7 @@ export class SingleFilmComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
-    this.film = new Film(0,'','','', new Date(),'');
+    this.film = new Film(0, '', '', '', new Date(), '');
     const id = this.route.snapshot.params['id'];
 
     this.filmsService.getSingleFilm(id).then(

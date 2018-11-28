@@ -32,20 +32,20 @@ export class BodyComponent implements OnInit, OnDestroy {
       (comments: Comment[]) => {
         this.comments = comments;
       }
-    )
+    );
     this.commentsService.emitComments();
   }
 
-  subFilms(){
+  subFilms() {
      this.filmSub = this.filmsService.filmsSubject.subscribe(
-      (films: Film[]) =>{
+      (films: Film[]) => {
         this.films = films;
       }
-    )
+    );
     this.filmsService.getFilmsFromServer();
     this.filmsService.emitFilms();
   }
-  onFetch(){
+  onFetch() {
     this.filmsService.getFilmsFromServer();
   }
 
@@ -53,7 +53,7 @@ export class BodyComponent implements OnInit, OnDestroy {
     this.router.navigate(['/films', 'view', id]);
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.filmSub.unsubscribe();
     this.commentSub.unsubscribe();
   }

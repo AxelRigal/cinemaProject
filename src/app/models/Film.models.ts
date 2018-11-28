@@ -7,7 +7,8 @@ export class Film {
         public synopsisShort: string,
         public synopsisLong: string,
         public date: Date,
-        public realisator: string
+        public realisator: string,
+
     ) {
 
     }
