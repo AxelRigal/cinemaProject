@@ -1,3 +1,21 @@
-<p>
-  user-setting works!
-</p>
+<div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+      <h2>Create a new Scénario</h2>
+      <form [formGroup]="scenarioForm" (ngSubmit)="onSaveScenario()">
+        <div class="form-group">
+          <label for="name">Title of the Scénario :</label>
+          <input type="text" class="form-control" id="name" formControlName="name">
+        </div>
+        <div class="form-group">
+            <label for="name">Whritter of the Scénario :</label>
+            <input type="text" class="form-control" id="realisator" formControlName="realisator">
+        </div>
+        <div class="form-group">
+            <label for="name">Date of the Scénario :</label>
+            <input type="date" class="form-control" id="date" formControlName="date">
+        </div>
+        <button class="btn btn-success" [disabled]="scenarioForm.invalid"> Save Scénario</button>
+      </form>
+    </div>
+  </div>
+  

@@ -11,11 +11,11 @@ export class FilmsService {
   filmsSubject = new Subject<Film[]>();
   constructor(private httpClient: HttpClient) { }
 
-  emitFilms(){
+  emitFilms() {
     this.filmsSubject.next(this.films);
   }
 
-  saveFilms(){
+  saveFilms() {
    firebase.database().ref('/films').set(this.films);
   }
   /*saveFilms(){
@@ -30,50 +30,49 @@ export class FilmsService {
         }
       )
   } */
-  getFilms(){
+  getFilms() {
     firebase.database().ref('/films')
-      .on('value', (data) =>{
+      .on('value', (data) => {
           this.films = data.val() ? data.val() : [];
           this.emitFilms();
       });
   }
 
-  getSingleFilm(id:number){
+  getSingleFilm(id: number) {
     return new Promise(
-      (resolve, reject) =>{
-        firebase.database().ref('/films/'+id).once('value').then(
+      (resolve, reject) => {
+        firebase.database().ref('/films/' + id).once('value').then(
           (data) => {
             resolve(data.val());
           },
           (error) => {
             reject(error);
           }
-        )
+        );
       }
-    )
+    );
   }
 
-  getFilmsFromServer(){
+  getFilmsFromServer() {
     this.httpClient
      .get<any[]>('https://cinema-project-dcb5f.firebaseio.com/films.json')
      .subscribe(
-       (response) =>{
-           this.films= response;
+       (response) => {
+           this.films = response;
            console.log(this.films);
            this.emitFilms();
        },
-       (error)=>{
+       (error) => {
            console.log('erreur de chargement ' + error);
        }
-     )
+     );
    }
 
-  getLastFilm()
-  {
+  getLastFilm() {
     return this.films.length;
   }
 
-  createNewFilm(newFilm: Film){
+  createNewFilm(newFilm: Film) {
     console.log(this.films);
     console.log(newFilm);
     this.films.push(newFilm);
@@ -81,10 +80,10 @@ export class FilmsService {
     this.emitFilms();
   }
 
-  removeFilm(film: Film){
+  removeFilm(film: Film) {
     const filmIndexToRemove = this.films.findIndex(
-      (filmEl) =>{
-        if(filmEl === film){
+      (filmEl) => {
+        if (filmEl === film) {
           return true;
         }
       }
@@ -94,7 +93,7 @@ export class FilmsService {
     this.emitFilms();
   }
 
-  getFilm(id : number){
+  getFilm(id: number) {
     return this.films[id];
   }
 }
